@@ -1,0 +1,80 @@
+.call-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.call-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #25d366;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+.call-button:hover {
+  background-color: #128c7e;
+  transform: scale(1.1);
+}
+
+.call-options {
+  position: absolute;
+  top: -100px;
+  right: 0;
+  background-color: #202c33;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: slideDown 0.3s ease-out;
+  z-index: 1000;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.call-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 14px;
+  background-color: transparent;
+}
+
+.call-option:hover {
+  background-color: #374045;
+}
+
+.call-option.video-call {
+  color: #25d366;
+}
+
+.call-option.audio-call {
+  color: #25d366;
+}
+
+.call-option span {
+  margin-left: 5px;
+} 

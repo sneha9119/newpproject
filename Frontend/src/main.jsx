@@ -1,3 +1,6 @@
+// Import polyfill first to ensure it's loaded before any other code
+import './nodePolyfill.js';
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
