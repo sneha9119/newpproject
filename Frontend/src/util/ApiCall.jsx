@@ -3,10 +3,14 @@ import axios from "axios";
 
 const ApiCall = async (url, method, navigate, setUser, data) => {
   console.log("******** Inside ApiCall function ********");
+  
+  // Format URL to use the proxy setup for absolute URLs
+  const formattedUrl = formatApiUrl(url);
+  console.log("Using API URL:", formattedUrl);
 
   if (method === "GET") {
     try {
-      const response = await axios.get(url);
+      const response = await axios.get(formattedUrl);
       return response.data;
     } catch (error) {
       console.error("Error in API call:", error);
@@ -27,7 +31,7 @@ const ApiCall = async (url, method, navigate, setUser, data) => {
     }
   } else if (method === "POST") {
     try {
-      const response = await axios.post(url, data);
+      const response = await axios.post(formattedUrl, data);
       return response.data;
     } catch (error) {
       console.error("Error in API call:", error);
@@ -48,5 +52,23 @@ const ApiCall = async (url, method, navigate, setUser, data) => {
     }
   }
 };
+
+// Helper function to format API URLs for proxy compatibility
+function formatApiUrl(url) {
+  // If we're in production and using the Netlify proxy
+  if (!import.meta.env.DEV && url.startsWith('http')) {
+    // Convert absolute URLs to relative ones that will use the proxy
+    try {
+      const urlObj = new URL(url);
+      // If the URL is to our backend, format it to use the proxy
+      if (urlObj.origin === import.meta.env.VITE_SERVER_URL) {
+        return `/api${urlObj.pathname}${urlObj.search}`;
+      }
+    } catch (e) {
+      console.error("Error parsing URL:", e);
+    }
+  }
+  return url;
+}
 
 export default ApiCall;

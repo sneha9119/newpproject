@@ -22,4 +22,15 @@ export default defineConfig({
       // Add any other aliases if needed
     }
   },
+  // Add server proxy configuration for development
+  server: {
+    proxy: {
+      // When accessing /api in development, proxy to the backend
+      '/api': {
+        target: 'https://backend-5l3616x2m-snehas-projects-3f585613.vercel.app',
+        changeOrigin: true,
+        secure: false,
+      }
+    }
+  }
 })
